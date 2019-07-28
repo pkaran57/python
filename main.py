@@ -1,8 +1,11 @@
 # imports must find files, compile them to byte code, and run the code.
+import decimal
 import math
 import random
 import sys                  # Load a library module
 
+from decimal import Decimal
+from fractions import Fraction
 import module               # import a module, each module file is a package of variables—that is, a namespace
 # commenting out line below so that it does not get removed while optimizing imports
 # from module import var1     from copies a module’s attributes, such that they become simple variables in the recipient
@@ -20,7 +23,7 @@ print(dir(str))         # Both dir and help also accept as arguments either a re
 print(dir(str.replace))
 
 """
-Build-In Data Types
+Build-In Data Types - Everything is an object in Python
 
 Numbers - 1234, 3.1415, 3+4j, 0b111, Decimal(), Fraction()
 Strings - 'spam', "Bob's", b'a\x01c', u'sp\xc4m'
@@ -37,6 +40,32 @@ Implementation-related types - Compiled code, stack tracebacks (Part IV, Part VI
 # Numbers - Python’s core objects set includes the usual suspects: integers that have no fractional part, floating-point numbers that do, and more exotic types—complex numbers
 # with imaginary parts, decimals with fixed precision, rationals with numerator and denominator, and full-featured sets.
 
+print('integer = {}'.format(999999))         # unlimited size
+
+# Floating-point numbers have a decimal point and/or an optional signed exponent introduced by an e or E and followed by an optional sign
+#  Floating-point numbers are implemented as C “doubles” in standard CPython, and therefore get as much precision as the C compiler used to build the Python interpreter
+print('float = {}'.format(-3.14e-10))
+
+# Decimal -  decimals are fixed-precision floating-point values
+# When decimals of different precision are mixed in expressions, Python converts up to the largest number of decimal digits automatically. For below, answer will be 0.00
+print("Decimal('0.1') + Decimal('0.1') + Decimal('0.1') - Decimal('0.3') = {}".format(Decimal('0.10') + Decimal('0.1') + Decimal('0.1') - Decimal('0.3')))
+
+print(" decimal.Decimal(1) / decimal.Decimal(7) = {}".format(Decimal(1) / Decimal(7)))
+decimal.getcontext().prec = 2      # The precision is applied globally for all decimals created in the calling thread
+print(" decimal.Decimal(1) / decimal.Decimal(7) = {}".format(Decimal(1) / Decimal(7)))
+
+# Fractions - Fraction is a functional cousin to the Decimal fixed-precision type described in the prior section,
+#             as both can be used to address the floating-point type’s numerical inaccuracies.
+
+print("Fraction(2, 3) = {}".format(Fraction(2, 3)))
+print("Fraction('.25') = {}".format(Fraction('.25')))
+
+# MIXED TYPES ARE CONVERTED UP - integers are simpler than floating-point numbers, which are simpler than complex numbers
+print('40 + 3.13 = {}'.format(40 + 3.13))
+
+print('int(-3.14) = {}'.format(int(-3.14)))         # Truncates float to integer
+
+
 random.random()
 math.sqrt(85)
 
@@ -48,8 +77,6 @@ and end-of-line characters are added where line breaks appear.
 '''
 print(S)
 print('Raw bytes - {}, str type - {}'.format(b'sp\xc4m', 'sp\xc4m'))   # In Python 3.X, the normal str string handles Unicode text, a distinct bytes string type represents raw byte values
-# Unicode processing mostly reduces to transferring text data to and from files—text is encoded to bytes when stored in a file, and decoded into characters (a.k.a. code points)
-# when read back into memory. Once it is loaded, we usually process text as strings in decoded form only.
 
 S = 'A\nB\tC'            # \n is end-of-line, \t is tab
 S = 'Spam'
@@ -129,13 +156,55 @@ print(T + (5, 6))
 print(T[0])
 # T[0] = 99    Tuples are immutable, cannot do this!
 T = 'spam', 3.0, [11, 22, 33]       # another way of creating a tuple, np params needed!
+print('Tuple comprehension statement - {}'.format(tuple(i for i in [1, 2, 3])))
 
 # Files
+# Unicode processing mostly reduces to transferring text data to and from files—text is encoded to bytes when stored in a file, and decoded into characters (a.k.a. code points)
+# when read back into memory. Once it is loaded, we usually process text as strings in decoded form only.
 
 f = open('data/data.txt', 'w')       # Make a new file in output mode ('w' is write)
-f.write('Hello world!\n')             # Write strings of characters to it
+f.write('Hello world!\n This is a great time to be alive!')             # Write strings of characters to it
 f.close()                      # Close to flush output buffers to disk
 
 f = open('data/data.txt')           # 'r' (read) is the default processing mode
 print('Following is the content of the file - \n{}'.format(f.read()))      # Read entire file into a string
 
+for line in open('data/data.txt') : print("Line : " + line)
+
+print(dir(f))
+
+# Sets
+
+print("set() = {}".format(set()))       # {} is an empty dictionary, use set() to create an empty set
+X = set('spam')
+Y = {'h', 'a', 'm'}
+print(X, Y)    # tuple of two sets
+print(X & Y)   # Intersection
+print(X | Y)   # Union
+print(X - Y)   # Difference
+print(X > Y)   # Superset
+print({n ** 2 for n in [1, 2, 3, 4]})   # Set comprehension
+print("set('spam') == set('asmp') = {}".format(set('spam') == set('asmp')))      # Order-neutral equality
+print("'p' in set('spam') = {}".format('p' in set('spam'))) # in membership test
+
+# Other types
+
+print(True, False)  # True and False objects that are essentially just the integers 1 and 0 with custom display logic
+print(None)         # special placeholder object called None commonly used to initialize names and objects
+L = ['This', 'is', 'a', 'list']
+print(type(L))      # The type object, returned by the type built-in function, is an object that gives the type of another object
+print(type(type(L)))
+
+# Expressions
+
+x = 0
+y = 100
+
+print("'true' if x else 'false' = {}".format('true' if x else 'false'))    # x if y else z, Ternary selection (x is evaluated only if y is true)
+print('x or y = {}'.format(x or y))          # Logical OR (y is evaluated only if x is false)
+print('x and y = {}'.format(x and y))        # Logical AND (y is evaluated only if x is true)
+print('not x = {}'.format(not x))
+print('x not in [0, 1] = {}'.format(x not in [0, 1]))
+x1 = x
+print('x1 is x = {}'.format(x1 is x))          # Object identity test
+print('x != 0 - {}'.format(x == 0))            # Value equality operators, != and ==
