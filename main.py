@@ -110,6 +110,11 @@ L = [1, 2, 6, 0]
 L.sort()
 L.reverse()
 
+L = [1, 2, 3]
+L += 'abc'          # += allows arbitrary sequences (just like extend)
+print('L = ', L)
+#L = L + 'spam'      # this will result into an error - TypeError: can only concatenate list (not "str") to list
+
 # Both the statements below will result in an IndexError
 # L[99] = 23
 # L[99]
