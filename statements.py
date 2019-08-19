@@ -1,34 +1,3 @@
-# Assignment Statement Forms
-tuple = spam, ham = 'yum', 'YUM'        # Tuple assignment (positional)
-list = [spam, ham] = ['yum', 'YUM']    # List assignment (positional)
-a, b, c, d = 'spam'             # Sequence assignment,  wherever the starred name shows up, it will be assigned a list that collects every unassigned name at that position
-a, *b, c = 'spam'               # Extended sequence unpacking (Python 3.X)
-spam = ham = 'lunch'            # Multiple-target assignment
-
-print('\nAssignment form general demo - \n')
-print('a = {}, b = {}, c = {}, d = {}\n spam = {}, ham = {}\n tuple = {}\n list = {}'.format(a, b, c, d, spam, ham, tuple, list))
-
-# Python assigns items in the sequence on the right to variables in the sequence on the left by position, from left to right:
-
-set = [a, b, c] = {1, 2, 3}    # a = 1 and so on
-string = (a, b, c) = "ABC"        # a = A and so on
-print('set = {}, string = {}'.format(set, string))
-print('a = {}, b = {}, c = {}'.format(a, b, c))
-
-for ((a, b), c) in [(('S', 'P'), 'AM')]: print('From for loop - a = {}, b = {}, c = {}'.format(a, b, c))
-
-print('\nBOUNDARY CASES demo - \n')
-seq = [1, 2, 3, 4]
-a, b, c, *d = seq
-print('a = {}, b = {}, c = {}, d = {}'.format(a, b, c, d))
-a, b, c, d, *e = seq
-print('a = {}, b = {}, c = {}, d = {}'.format(a, b, c, d))
-*a, = seq
-print('a = ', a)
-
-# a, *b, c, *d = seq        SyntaxError: two starred expressions in assignment
-# a, b = seq                ValueError: too many values to unpack (expected 2)
-# *a = seq                  SyntaxError: starred assignment target must be in a list or tuple
 '''
 Indentation
 
@@ -36,8 +5,6 @@ Python doesn’t care how you indent (you may use either spaces or tabs), or how
 The syntax rule is only that for a given single nested block, all of its statements must be indented the same distance to the right. If this is not the case, you will get a syntax error, and your code will not run until you repair its indentation to be consistent.
 As a rule of thumb, you probably shouldn’t mix tabs and spaces in the same block in Python, unless you do so consistently; use tabs or spaces in a given block, but not both
 '''
-
-print('\nStatements demo - \n')
 
 X = (1 +
      2)     # using newline is okay here since brackets are used
@@ -70,6 +37,10 @@ if True:
 while True:
     if X == 100: break    # continue is also a keyword which can be used similarly
 
+# No switch statements in Python, use dictionaries instead:
+branch = {'spam': 1.25, 'ham':  1.99, 'eggs': 0.99}
+print('dictionary switch - ', branch.get('choice', 'default'))
+
 try:
     int('XYZ')
 except:
@@ -77,3 +48,24 @@ except:
 else:
     print('This will run if no exception raised')
 
+''' Truth Values and Boolean Tests
+
+All objects have an inherent Boolean true or false value.
+Any nonzero number or nonempty object is true.
+Zero numbers, empty objects, and the special object None are considered false.
+Comparisons and equality tests are applied recursively to data structures.
+Comparisons and equality tests return True or False (custom versions of 1 and 0).
+Boolean and and or operators return a true or false operand object.
+Boolean operators stop evaluating (“short circuit”) as soon as a result is known.
+
+if f1() or f2(): ...
+Here, if f1 returns a true (or nonempty) value, Python will never run f2. To guarantee that both functions will be run, call them before the or:
+tmp1, tmp2 = f1(), f2()
+if tmp1 or tmp2: ...
+'''
+
+print('Empty string has following boolean value - ', 'true' if '' else 'false')
+L = ['', 1, False, True, None]
+L1 = [x for x in L if x]
+print('All truth values in L1 = ', L1)
+print('any(L) = {}, all(L) = {}'.format(any(L), all(L)))      # Aggregate truth
