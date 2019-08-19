@@ -2,11 +2,12 @@
 import decimal
 import math
 import random
-import sys                  # Load a library module
-
+import sys  # Load a library module
 from decimal import Decimal
 from fractions import Fraction
-import module               # import a module, each module file is a package of variables—that is, a namespace
+
+import module  # import a module, each module file is a package of variables—that is, a namespace
+
 # commenting out line below so that it does not get removed while optimizing imports
 # from module import var1     from copies a module’s attributes, such that they become simple variables in the recipient
 
@@ -182,6 +183,16 @@ print('Following is the content of the file - \n', f.read())      # Read entire 
 for line in open('data/data.txt') : print("Line : " + line)
 
 print(dir(f))
+
+# Redirecting streams
+
+print("test", "test1", "test2", sep='...', end='\n', file=open('data/outPutData.txt', 'w'))
+
+temp = sys.stdout
+sys.stdout = open('data/outPutData.txt', 'a')       # Redirects prints to a file
+print('print this out in file')
+sys.stdout.close()            # Flush output to disk
+sys.stdout = temp
 
 # Sets
 
