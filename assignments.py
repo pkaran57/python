@@ -1,17 +1,19 @@
 # Assignment Statement Forms
-tuple = spam, ham = 'yum', 'YUM'        # Tuple assignment (positional)
-list = [spam, ham] = ['yum', 'YUM']    # List assignment (positional)
-a, b, c, d = 'spam'             # Sequence assignment,  wherever the starred name shows up, it will be assigned a list that collects every unassigned name at that position
-a, *b, c = 'spam'               # Extended sequence unpacking (Python 3.X)
-spam = ham = 'lunch'            # Multiple-target assignment
+tuple = spam, ham = 'yum', 'YUM'  # Tuple assignment (positional)
+list = [spam, ham] = ['yum', 'YUM']  # List assignment (positional)
+a, b, c, d = 'spam'  # Sequence assignment,  wherever the starred name shows up, it will be assigned a list that collects every unassigned name at that position
+a, *b, c = 'spam'  # Extended sequence unpacking (Python 3.X)
+spam = ham = 'lunch'  # Multiple-target assignment
 
 print('\nAssignment form general demo - \n')
-print('a = {}, b = {}, c = {}, d = {}\n spam = {}, ham = {}\n tuple = {}\n list = {}'.format(a, b, c, d, spam, ham, tuple, list))
+print(
+    'a = {}, b = {}, c = {}, d = {}\n spam = {}, ham = {}\n tuple = {}\n list = {}'.format(a, b, c, d, spam, ham, tuple,
+                                                                                           list))
 
 # Python assigns items in the sequence on the right to variables in the sequence on the left by position, from left to right:
 
-set = [a, b, c] = {1, 2, 3}    # a = 1 and so on
-string = (a, b, c) = "ABC"        # a = A and so on
+set = [a, b, c] = {1, 2, 3}  # a = 1 and so on
+string = (a, b, c) = "ABC"  # a = A and so on
 print('set = {}, string = {}'.format(set, string))
 print('a = {}, b = {}, c = {}'.format(a, b, c))
 
