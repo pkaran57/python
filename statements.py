@@ -66,10 +66,3 @@ else:
 # No switch statements in Python, use dictionaries instead:
 branch = {'spam': 1.25, 'ham': 1.99, 'eggs': 0.99}
 print('dictionary switch - ', branch.get('choice', 'default'))
-
-try:
-    int('XYZ')
-except:
-    print('XYZ is not an int!')
-else:
-    print('This will run if no exception raised')
