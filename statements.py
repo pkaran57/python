@@ -69,3 +69,19 @@ else:
 # No switch statements in Python, use dictionaries instead:
 branch = {'spam': 1.25, 'ham': 1.99, 'eggs': 0.99}
 print('dictionary switch - ', branch.get('choice', 'default'))
+
+# Loop Coding Techniques - range, zip, enumerate
+for i in range(-6, 6, 2):
+    print(i, 'Pythons')     # range is an iterable that generates items on demand
+
+L1 = [1, 2, 3, 4, 99]
+L2 = [5, 6, 7, 8]
+# zip takes one or more sequences as arguments and returns a series of tuples that pair up parallel items taken from those sequences.
+# zip truncates result tuples at the length of the shortest sequence when the argument lengths differ
+print('zip result = ', list(zip(L1, L2)))       # Truncates at len(shortest)
+
+
+for (offset, item) in enumerate(['a', 'b', 'c']):        # enumerate's net effect is to give loops a counter “for free” by returning an (index, value) tuple each time through the loop
+    print(item, ' appears at position ', offset)
+
+print("next(enumerate('s')) = ", next(enumerate('s')))

@@ -1,3 +1,5 @@
+import sys
+
 # Files
 # Unicode processing mostly reduces to transferring text data to and from files—text is encoded to bytes when stored in a file, and decoded into characters (a.k.a. code points)
 # when read back into memory. Once it is loaded, we usually process text as strings in decoded form only.
@@ -15,7 +17,7 @@ file = open('data/data.txt')
 while True:
     char = file.read(1)         # Read by character
     if not char: break          # Empty string means end-of-file
-    print(char)
+    print(char, end='')        # Line already has a \n
 
 print(dir(f))
 
