@@ -41,6 +41,9 @@ else:
 
 print("'list' from the for statement above carries over! X = ", X)
 
+L = [(1, 2, 3), (4, 5, 6)]
+for (a, *b, c) in L: print('a = {}, b = {}, c = {}'.format(a, b, c))        # complex variable assignments an be used in a for loop
+
 X, Y = 0, 99
 
 while X < Y:
