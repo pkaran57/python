@@ -85,3 +85,59 @@ for (offset, item) in enumerate(['a', 'b', 'c']):        # enumerate's net effec
     print(item, ' appears at position ', offset)
 
 print("next(enumerate('s')) = ", next(enumerate('s')))
+
+"""
+Iteration protocol
+
+* The iterable object you request iteration for, whose __iter__ is run by iter
+* The iterator object returned by the iterable that actually produces values during the iteration, whose __next__ is run by next and raises StopIteration when finished producing results
+
+A file object is its own iterator. Because files support just one iteration (they can’t seek backward to support multiple active scans), files have their own __next__ method and do not need to return a different object, they just return the same file object. Example: `iter(f) is f` returns true
+
+Lists and many other built-in objects, though, are not their own iterators because they do support multiple open iterations—for example, there may be multiple iterations in nested loops all at different positions. For such objects, we must call iter to start iterating
+
+"""
+
+L = [1]
+I = iter(L)                               # Obtain an iterator object from an iterable
+print('I.__next__() = ', I.__next__())    # Call iterator's next to advance to next item
+# I.__next__()                              # Will raise StopIteration exception
+print('iter(L).__next__() = ', iter(L).__next__())    # New iterator on the same list object
+print('iter(range(5)).__next__() = ', iter(range(5)).__next__())
+
+# List comprehensions can be used to iterate over any iterable object
+
+print([c * 2 for c in 'spam'])                      # Repeat characters in a string
+print([[x, x / 2, x * 2] for x in range(5) if x % 2 == 0])              # if clause
+print([x + y + z for x in 'abc' for y in 'lmn' for z in 'xyz'])         # nested for loops
+
+# both set and dictionary comprehensions support the extended syntax of list comprehensions
+listOfLines = ['line1', 'line2', 'filterOut']
+print('Set = ', {line for line in listOfLines if line[0] == 'l'})
+print('Dict = ', {ix: line for ix, line in enumerate(listOfLines) if line[0] == 'l'})
+
+# map(), filter(), min(), max(), any(), all()
+# map, zip, and filter are their own iterators — after you step through their results once, they are exhausted
+
+L = ['a', 'b']
+strMap = map(str.upper, L)
+print(strMap.__next__())                 # map is itself an iterable in 3.X
+print(list(strMap))
+
+print(list(filter(bool, ['3', '', '1'])))       # nonempty=True
+print(sum([3, 2, 4, 1, 5, 0]))
+print(max([3, 2, 4, 1, 5, 0]))
+print(min([3, 2, 4, 1, 5, 0]))
+# the any and all built-ins return True if any or all items in an iterable are True
+print(any(['spam', '', 'ni']))
+print(all(['spam', '', 'ni']))
+
+# '*arg' form can be used in function calls to unpack a collection of values into individual arguments
+def f(a, b, c, d): print(a, b, c, d, sep='&')
+f(*[1, 2, 3, 4])
+
+X = (1, 2)
+Y = (3, 4)
+
+A, B = zip(*zip(X, Y))
+print('A = {}, B = {}'.format(A, B))

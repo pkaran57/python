@@ -132,12 +132,6 @@ print([row[1] + 1 for row in M])                    # Add 1 to each item in colu
 print([row[1] for row in M if row[1] % 2 == 0])     # Filter out odd items
 print([M[i][i] for i in [0, 1, 2]])                 # Collect a diagonal from matrix
 
-# List comprehensions can be used to iterate over any iterable object
-print([c * 2 for c in 'spam'])                      # Repeat characters in a string
-print([i for i in range(3)])        # can also use list(range(3))
-# List comprehensions can also be used to collect multiple values, as long as we wrap those values in a nested collection
-print([[x, x / 2, x * 2] for x in range(4) if x % 2 == 0])
-
 # Generators using comprehensions - its values aren’t stored in memory all at once, but are produced as requested
 
 G = (sum(row) for row in M)
