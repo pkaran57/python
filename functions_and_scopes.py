@@ -46,6 +46,85 @@ seq1 = zip((1, 2, 3), (4, 5, 6))
 seq2 = [(1, 4), (2, 5), (3, 6)]
 print(intersect(seq1, seq2))
 
+
+def return_tuple():
+    return 1, [2, 3]  # returns tuple, tuple variable assignment at play
+
+
+a, b = return_tuple()
+print('Items returned by function as tuple = {}, {}'.format(a, b))
+
+''' Arguments
+
+By default, arguments are matched by position, from left to right, and you must pass exactly as many arguments as there are argument names in the function header. However, you can also specify matching by name, provide default values, and use collectors for extra arguments.
+
+If you choose to use and combine the special argument-matching modes, Python will ask you to follow these ordering rules among the modes’ optional components:
+
+* In a function call, arguments must appear in this order: any positional arguments (value); followed by a combination of any keyword arguments (name=value) and the *iterable form; followed by the **dict form.
+* In a function header, arguments must appear in this order: any normal arguments (name); followed by any default arguments (name=value); followed by the *name (or * in 3.X) form; followed by any name or name=value keyword-only arguments (in 3.X); followed by the **name form.
+
+The steps that Python internally carries out to match arguments before assignment can roughly be described as follows:
+1. Assign nonkeyword arguments by position.
+2. Assign keyword arguments by matching names.
+3. Assign extra nonkeyword arguments to *name tuple.
+4. Assign extra keyword arguments to **name dictionary.
+5. Assign default values to unassigned arguments in header.
+After this, Python checks to make sure each argument is passed just one value; if not, an error is raised. When all matching is complete, Python assigns argument names to the objects passed to them.
+'''
+
+
+def f(a, b=[77, 88], c=99, modify_b=False):
+    print('f(a,b,c) = ', a, b, c)  # 99 is default for c
+    if (modify_b): b[1] = 55
+
+
+f(1, 2, 3)
+f(c=3, b=2, a=1)
+f(1, c=3, b=2)  # a gets 1 by position, b and c passed by name
+f(1, 2)
+f(1, c=2)  # b is the default one
+
+f(2, modify_b=True)
+# argument’s default retains its value from the prior call, and is not reset to its original value coded in the def header. To reset anew on each call, move the assignment into the function body instead.
+f(3)
+
+
+def tup(*args): print('tup() = ',args)  # Python collects all the positional arguments into a new tuple and assigns the variable args to that tuple
+tup()
+tup(1)
+tup(1, 2, 3, 4, 5)
+
+
+# The ** feature is similar, but it only works for keyword arguments—it collects them into a new dictionary, which can then be processed with normal dictionary tools
+def dict(**args): print('dict() = ',args)
+dict()
+# dict(1,2)     # Will throw TypeError: dict() takes 0 positional arguments but 2 were given
+dict(a=1, b=2)
+
+
+def mix(a, *pargs, **kargs): print('mix() = ', a, pargs, kargs, sep=', ')
+mix(1, 2, 3, x=1, y=2)
+
+# *pargs form in a call is an iteration context, so technically it accepts any iterable object.  For instance, a file object works after the *, and unpacks its lines into individual arguments (e.g., func(*open('fname'))
+f(*(22, 33, 44))        # UNPACKING tuple
+f(*[22, 33, 44])        # UNPACKING list
+
+f(**{'c': 22, 'a': 33, 'b': 44})        # UNPACKING dictionary, note that using ** instead of *
+
+# keyword-only arguments are coded as named arguments that may appear after *args in the arguments list. All such arguments must be passed using keyword syntax in the call.
+def kwonly(a, *b, c):
+    print(a, b, c)
+
+kwonly(a=1, c=3)
+# kwonly(1, 2, 3)            # TypeError: kwonly() missing 1 required keyword-only argument: 'c'
+
+# We can also use a * character by itself in the arguments list to indicate that a function does not accept a variable-length argument list but still expects all arguments following the * to be passed as keywords.
+def kwonly(a, *, b, c, d= 99):
+    print(a, b, c, d)
+
+kwonly(1, b=1, c=1)     # keyword-only arguments with defaults are optional
+# kwonly(1, 2, 3)            # TypeError: kwonly() missing 2 required keyword-only arguments: 'b' and 'c'
+
 ''' 4 scopes in Python:
 1. Built-in - Names in the built-in module (ex: open, range)
 2. Global (module) - All the names assigend at top level of a module file, or declared global in a def within a file
@@ -63,7 +142,7 @@ X = 88
 def func():
     global X  # global statement tells Python that a function plans to change one or more global names
     global Y
-    Y= 9
+    Y = 9
     X = 99  # Local X: hides global, but we want this here
 
 
