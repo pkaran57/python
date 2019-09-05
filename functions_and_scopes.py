@@ -1,6 +1,7 @@
 # The def statement creates a function object and assigns it to a name. If return is omitted or if return has no value, None is returned
 # def is a true executable statement: when it runs, it creates a new function object and assigns it to a name
 import builtins
+import sys
 
 
 def hello_world_main():
@@ -174,3 +175,11 @@ func_2 = non_local_demo(5)
 print('function attribute - ', func_1.func_attr)
 print('invocation #1 = {}, #2 = {}'.format(func_1(), func_1()))
 print('invocation #1 = {}, #2 = {}'.format(func_2(), func_2()))
+
+
+# recursion
+def mysum(L): return 0 if not L else L[0] + mysum(L[1:])
+
+print('Sum = ', mysum([1,2,3]))
+print(sys.getrecursionlimit())          # max stack depth
+print(help(sys.setrecursionlimit))
