@@ -17,6 +17,14 @@ print(sys.platform)
 print(module.var1, var1)
 
 '''
+`python -m pydoc -b` command to start browser only mode of PyDoc. The effect is to start PyDoc as a locally running web server on a dedicated (but by default arbitrary unused) port, and pop up
+ a web browser to act as client, displaying a page giving links to documentation for all the modules importable on your module search path (including the directory where PyDoc is launched).
+ 
+ If you ask for documentation for a top-level script file, though, the shell window where you launched PyDoc serves as the script’s standard input and output for any user interaction. The net effect is that the documentation page for a script will appear AFTER IT RUNS THE SCRIPT, AND AFTER ITS PRINTED OUTPUT SHOWS UP IN THE SHELL WINDOW.
+'''
+print('Pydoc for module - ', module.__doc__)       # print out pydoc for the module called 'module'
+
+'''
 Weak Reference - implemented by the weakref standard library module, is a reference to an object that does not by itself prevent the referenced object from being garbage-collected. 
 If the last remaining references to an object are weak references, the object is reclaimed and the weak references to it are automatically deleted (or otherwise notified).
 '''
