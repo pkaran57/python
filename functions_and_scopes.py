@@ -4,7 +4,9 @@ import builtins
 import sys
 
 
-def hello_world_main():
+# function annotations — arbitrary user-defined data about a function’s arguments and result—to a function object.
+# Annotations are simply attached to the function object’s __annotations__ attribute for use by other tools. For instance, such a tool might use annotations in the context of error testing.
+def hello_world_main(a:'annotation to a parameter'= 9, b:bool=True) -> 'return value annotation':             # when the def is done running, hello_world_main variable gets assigned the function object
     test = None
     if test:
         def hello_world():
@@ -19,6 +21,7 @@ function_object = hello_world_main
 function_object()
 function_object.test = True  # functions allow arbitrary attributes to be attached to record information for later use
 
+print('hello_world_main function annotations - ', hello_world_main.__annotations__)     # function annotations stored inside a dictionary
 
 # polymorphism - meaning of an operation depends on the objects being operated upon. Example x + y where x and y are strings vs numbers
 def polymorphism(x, y):
