@@ -1,4 +1,22 @@
-# imports must find files, compile them to byte code, and run the code.
+'''
+imports must find module's file, compile them to byte code (if needed), and run the module’s code to build the objects it defines
+
+Compile if - byte code file is older than the source file (i.e., if you’ve changed the source) or was created by a different Python version, Python automatically regenerates the byte code when the program is run
+Don't compile if - Python finds a .pyc byte code file that is not older than the corresponding .py source file and was created by the same Python version, it skips the source-to-byte-code compile step
+
+The final step of an import operation executes the byte code of the module. All statements in the file are run in turn, from top to bottom, and any assignments made to names during this step generate attributes of the resulting module object.
+
+Any given module is imported only once per process by default. Future imports skip all three import steps and reuse the already loaded module in memory. If you need to import a file again after it has already been loaded (for example, to support dynamic end-user customizations), you have to force the issue with an imp.reload call
+
+The Module Search Path - need to tell Python where to look to find files to import:
+
+1. The home directory of the program (automatic) - directory containing your program’s top-level script file
+2. PYTHONPATH directories (if set) (configurable) - Python searches all directories listed in your PYTHONPATH environment variable setting, from left to right
+3. Standard library directories (automatic) - Python automatically searches the directories where the standard library modules are installed on your machine
+4. The contents of any .pth files (if present) (configurable) - advanced feature, google
+5. The site-packages home of third-party extensions (automatic) - Python automatically adds the site-packages subdirectory of its standard library to the module search path. By convention, this is the place that most third-party extensions are installed
+'''
+
 import decimal
 import math
 import random
@@ -7,6 +25,8 @@ from decimal import Decimal
 from fractions import Fraction
 
 import module  # import a module, each module file is a package of variables—that is, a namespace
+
+print('Module search path - ', sys.path)
 
 # commenting out line below so that it does not get removed while optimizing imports
 # from module import var1     from copies a module’s attributes, such that they become simple variables in the recipient
