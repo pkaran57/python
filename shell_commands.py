@@ -9,4 +9,3 @@ def demo():
         print(line.rstrip())
 
     os.system('systeminfo')     # os.system simply runs a shell command, but os.popen also connects to its streams
-

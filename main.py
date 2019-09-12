@@ -24,11 +24,15 @@ It is also possible to create a Python module by writing code in an external lan
 import sys  # Load a library module
 from importlib import reload
 
+import data_types
 import module  # import a module, each module file is a package of variables—that is, a namespace
+# two packages with same module
+import package1.utility
+import package2.utility
 # from module1 import *                   # Copy out _all_ variables
 # from M import func as mfunc    # Rename uniquely with "as"
 import shell_commands
-from data_types import basic_types, collection_types, file_type
+from data_types import basic_types, collection_types, file_type, x_in_package_init
 from functions import functions_and_scopes, lambda_expressions, generators
 from statements_expressions import expressions, assignments, statements
 
@@ -69,6 +73,13 @@ print(dir(str.replace))
 basic_types.demo()
 collection_types.demo()
 file_type.demo()
+
+print('var in package init file - ', x_in_package_init)
+print('var in package init file - ', data_types.x_in_package_init)
+print('reload imported directory / package - ', reload(data_types))
+
+package1.utility.printing_fun()
+package2.utility.printing_fun()
 
 shell_commands.demo()
 
