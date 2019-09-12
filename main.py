@@ -27,6 +27,7 @@ from importlib import reload
 import module  # import a module, each module file is a package of variables—that is, a namespace
 # from module1 import *                   # Copy out _all_ variables
 # from M import func as mfunc    # Rename uniquely with "as"
+import shell_commands
 from data_types import basic_types, collection_types, file_type
 from functions import functions_and_scopes, lambda_expressions, generators
 from statements_expressions import expressions, assignments, statements
@@ -68,6 +69,8 @@ print(dir(str.replace))
 basic_types.demo()
 collection_types.demo()
 file_type.demo()
+
+shell_commands.demo()
 
 assignments.demo()
 expressions.demo()
