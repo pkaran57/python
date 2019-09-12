@@ -21,15 +21,6 @@ from decimal import Decimal
 from fractions import Fraction
 
 
-def demo():
-    numbers()
-    string()
-    others()
-
-
-demo()
-
-
 def numbers():
     """
     Python’s core objects set includes the usual suspects: integers that have no fractional part, floating-point numbers that do, and more exotic types—complex numbers with imaginary parts,
@@ -95,3 +86,9 @@ def others():
     L = ['This', 'is', 'a', 'list']
     print(type(L))      # The type object, returned by the type built-in function, is an object that gives the type of another object
     print(type(type(L)))
+
+
+def demo():
+    numbers()
+    string()
+    others()

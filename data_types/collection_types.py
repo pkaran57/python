@@ -1,13 +1,3 @@
-def demo():
-    list_type()
-    dictionaries_type()
-    tuple_type()
-    set_type()
-
-
-demo()
-
-
 def list_type():
     """Lists - Lists are positionally ordered collections of arbitrarily typed objects, and they have no fixed size. They are also mutable"""
 
@@ -83,3 +73,10 @@ def set_type():
     print({n ** 2 for n in [1, 2, 3, 4]})   # Set comprehension
     print("set('spam') == set('asmp') = ", set('spam') == set('asmp'))      # Order-neutral equality
     print("'p' in set('spam') = ", 'p' in set('spam')) # in membership test
+
+
+def demo():
+    list_type()
+    dictionaries_type()
+    tuple_type()
+    set_type()

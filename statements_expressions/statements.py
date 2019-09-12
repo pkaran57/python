@@ -149,3 +149,12 @@ def useful_lib_functions():
     # the any and all built-ins return True if any or all items in an iterable are True
     print(any(['spam', '', 'ni']))
     print(all(['spam', '', 'ni']))
+
+
+def demo():
+    truthiness()
+    control_statements()
+    iteration_protocol()
+    comprehensions()
+    looping_functions()
+    useful_lib_functions()

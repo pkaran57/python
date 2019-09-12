@@ -16,35 +16,37 @@ import sys
 
 file_name = 'data/data.txt'
 
-# write to file
-f = open(file_name, 'w')       # Make a new file in output mode ('w' is write)
-f.write('Hello world!\n This is a great time to be alive!')             # Write strings of characters to it
-f.close()                      # Close to flush output buffers to disk
+def demo():
 
-# read from file
-f = open(file_name)           # 'r' (read) is the default processing mode
-print('Following is the content of the file - \n', f.read())      # Read entire file into a string
+    # write to file
+    f = open(file_name, 'w')       # Make a new file in output mode ('w' is write)
+    f.write('Hello world!\n This is a great time to be alive!')             # Write strings of characters to it
+    f.close()                      # Close to flush output buffers to disk
 
-# iterate through each line in the file
-for line in open(file_name): print("Line : " + line)
+    # read from file
+    f = open(file_name)           # 'r' (read) is the default processing mode
+    print('Following is the content of the file - \n', f.read())      # Read entire file into a string
 
-# iterate through file char by char
-file = open(file_name)
-while True:
-    char = file.read(1)         # Read by character
-    if not char: break          # Empty string means end-of-file
-    print(char, end='')        # Line already has a \n
+    # iterate through each line in the file
+    for line in open(file_name): print("Line : " + line)
+
+    # iterate through file char by char
+    file = open(file_name)
+    while True:
+        char = file.read(1)         # Read by character
+        if not char: break          # Empty string means end-of-file
+        print(char, end='')        # Line already has a \n
 
 
-print(dir(f))
+    print(dir(f))
 
-# Redirecting streams
-print("test", "test1", "test2", sep='...', end='\n', file=open('data/outPutData.txt', 'w'))
+    # Redirecting streams
+    print("test", "test1", "test2", sep='...', end='\n', file=open('data/outPutData.txt', 'w'))
 
-temp = sys.stdout
-sys.stdout = open('data/outPutData.txt', 'a')       # Redirects prints to a file
-print('print this out in file')
-sys.stdout.close()            # Flush output to disk
-sys.stdout = temp
+    temp = sys.stdout
+    sys.stdout = open('data/outPutData.txt', 'a')       # Redirects prints to a file
+    print('print this out in file')
+    sys.stdout.close()            # Flush output to disk
+    sys.stdout = temp
 
-print('Will output to the standard output/console and NOT the file')
+    print('Will output to the standard output/console and NOT the file')

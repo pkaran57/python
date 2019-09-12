@@ -1,4 +1,6 @@
 """
+Imports and modules
+
 imports must find module's file, compile them to byte code (if needed), and run the module’s code to build the objects it defines
 
 * Compile if - byte code file is older than the source file (i.e., if you’ve changed the source) or was created by a different Python version, Python automatically regenerates the byte code when the program is run
@@ -23,9 +25,11 @@ import sys  # Load a library module
 from importlib import reload
 
 import module  # import a module, each module file is a package of variables—that is, a namespace
-
 # from module1 import *                   # Copy out _all_ variables
 # from M import func as mfunc    # Rename uniquely with "as"
+from data_types import basic_types, collection_types, file_type
+from functions import functions_and_scopes, lambda_expressions, generators
+from statements_expressions import expressions, assignments, statements
 
 reload(module)      # reload module
 
@@ -60,3 +64,15 @@ print(dir(aString))           # dir() attempts to return all attributes of this 
 print(help(aString.replace))  # Get info on a specific attribute
 print(dir(str))         # Both dir and help also accept as arguments either a real object (like our string S), or the name of a data type (like str, list, and dict)
 print(dir(str.replace))
+
+basic_types.demo()
+collection_types.demo()
+file_type.demo()
+
+assignments.demo()
+expressions.demo()
+statements.demo()
+
+functions_and_scopes.demo()
+lambda_expressions.demo()
+generators.demo()
