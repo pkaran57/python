@@ -31,9 +31,18 @@ class Vehicle:
 class Plane(Vehicle, Machine):
     def description(self):
         print('This is a Plane')
+        Vehicle.description()           # call the superclass's description method
 
     def __str__(self):
         return 'This is a Plane, king of the skies!'
+
+    def __repr__(self):
+        """
+        __repr__ method is often used to provide an as-code low-level display of an object when present, and __str__ is reserved for more user-friendly informational displays like ours here.
+        Sometimes classes provide both a __str__ for user-friendly displays and a __repr__ with extra details for developers to view. Because printing runs __str__ and the interactive prompt
+        echoes results with __repr__, this can provide both target audiences with an appropriate display.
+        """
+        return '[Plane] This is a Plane, king of the skies! Number of wheels - {}'.format(self.num_of_wheels)
 
     def __add__(self, other):
         return Plane(self.num_of_wheels + other)
@@ -44,7 +53,11 @@ plane = Plane(2)
 plane.description()
 
 # plane.print_date_manufactured()                   # will thorw AttributeError: 'Plane' object has no attribute 'date_manufactured'
+
+# class’s method can always be called either through an instance (the usual way, where Python sends the instance to the self argument automatically) or through the class
 plane.set_date_manufactured('2019-09')
+Plane.set_date_manufactured(plane, '2019-09')
+
 plane.print_date_manufactured()
 plane.date_manufactured = '1999-99'                 # Bypassing setter
 plane.print_date_manufactured()
