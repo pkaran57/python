@@ -98,9 +98,21 @@ print('\nbefore_attr_assignment - ', before_attr_assignment.key)
 print('Machine.key - ', Machine.key)
 print('after_attr_assignment - ', after_attr_assignment.key)
 
-# Normally, __dict__ literally is an instance’s attribute namespace.
-print('\nattribute namespace of before_attr_assignment = ', before_attr_assignment.__dict__.keys())
-print('each instance has a link to its class - ', before_attr_assignment.__class__)
+
+'''
+instance.__class__ attribute provides a link from an instance to the class from which it was created. Classes in turn have a __name__, 
+just like modules, and a __bases__ sequence that provides access to superclasses. We can use these here to print the name of the class 
+from which an instance is made rather than one we’ve hardcoded.
+
+object.__dict__ attribute provides a dictionary with one key/value pair for every attribute attached to a namespace object 
+(including modules, classes, and instances). Because it is a dictionary, we can fetch its keys list, index by key, iterate over its keys, and so on, to process all attributes generically.
+
+Normally, __dict__ literally is an instance’s attribute namespace.
+'''
+print('\nattribute namespace of plane = ', plane.__dict__.keys())      # Instance attrs only
+print('Instance attributes + inherited attrs = ', dir(plane))      # Plus inherited attrs in classes
+
+print('each instance has a link to its class - ', plane.__class__)
 
 
 def upper(x):
