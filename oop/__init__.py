@@ -26,12 +26,18 @@ class Vehicle:
     def print_date_manufactured(self):
         print(self.date_manufactured)
 
+    def __str__(self):
+        return 'This is a Vehicle!'
+
 
 # In Python, if there is more than one superclass listed in parentheses in a class statement, their left-to-right order gives the order in which those superclasses will be searched for attributes by inheritance
 class Plane(Vehicle, Machine):
+    def __init__(self, num_of_wheels):
+        Vehicle.__init__(self, num_of_wheels)       # call superclass's constructor
+
     def description(self):
         print('This is a Plane')
-        Vehicle.description()           # call the superclass's description method
+        Vehicle.description(self)           # call the superclass's description method
 
     def __str__(self):
         return 'This is a Plane, king of the skies!'
