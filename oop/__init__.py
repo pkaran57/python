@@ -1,4 +1,5 @@
 class Machine:
+    class_attr = {'one': 1}
 
     def set_date_manufactured(self, date_manufactured):
         self.date_manufactured = 'Machine is manufactured on - ' + date_manufactured
