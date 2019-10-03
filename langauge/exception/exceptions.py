@@ -1,4 +1,24 @@
 """
+* Built-in Exception Classes
+
+BaseException: topmost root, printing and constructor defaults
+    The top-level root superclass of exceptions. This class is not supposed to be directly inherited by user-defined classes (use Exception instead). It provides default printing and state retention
+    behavior inherited by subclasses. If the str built-in is called on an instance of this class (e.g., by print), the class returns the display strings of the constructor arguments passed when the
+    instance was created (or an empty string if there were no arguments). In addition, unless subclasses replace this class’s constructor, all of the arguments passed to this class at instance
+    construction time are stored in its args attribute as a tuple.
+
+Exception: root of user-defined exceptions
+    The top-level root superclass of application-related exceptions. This is an immediate subclass of BaseException and is a superclass to every other built-in exception, except the system exit event
+    classes (SystemExit, KeyboardInterrupt, and GeneratorExit). Nearly all user-defined classes should inherit from this class, not BaseException. When this convention is followed, naming Exception in
+    a try statement’s handler ensures that your program will catch everything but system exit events, which should normally be allowed to pass. In effect, Exception becomes a catchall in try statements
+    and is more accurate than an empty except.
+
+ArithmeticError: root of numeric errors
+    A subclass of Exception, and the superclass of all numeric errors. Its subclasses identify specific numeric errors: OverflowError, ZeroDivisionError, and FloatingPointError.
+
+LookupError: root of indexing errors
+    A subclass of Exception, and the superclass category for indexing errors for both sequences and mappings—IndexError and KeyError—as well as some Unicode lookup errors.
+
 * Keywords:
 
 try/except
@@ -113,6 +133,23 @@ class TraceBlock:
             return True    # Swallow exception for the sake of demo so that demo does not crash
 
 
+def demo_exception_hierarchy():
+
+    class General(Exception): pass
+    class Specific1(General): pass
+    class Specific2(General): pass
+
+    def raiser0(): raise General()
+    def raiser1(): raise Specific1()
+    def raiser2(): raise Specific2()
+
+    for func in (raiser0, raiser1, raiser2):
+        try:
+            func()
+        except General as X:                     # X is the raised instance
+            print('caught: %s' % X.__class__)    # Same as sys.exc_info()[0]
+
+
 def demo():
     X = 99
     try:
@@ -152,3 +189,6 @@ def demo():
         # badname                                    # Implicitly chained exceptions
 
     context_management_demo()
+    demo_exception_hierarchy()
+
+demo()
