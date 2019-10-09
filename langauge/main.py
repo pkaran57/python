@@ -35,6 +35,7 @@ from langauge.oop import oop
 from langauge.package1 import utility as pkg1_util
 from langauge.package2 import utility as pkg2_util
 from langauge.statements_expressions import expressions, assignments, statements
+from langauge.threads import threads, locks
 
 reload(module)      # reload module
 
@@ -94,3 +95,7 @@ generators.demo()
 oop.demo()
 
 exceptions.demo()
+
+threads.demo()
+locks.demo()
+# conditions.demo()             # commented out since this demo contains an infinite loop, look at it!
