@@ -1,3 +1,17 @@
+"""
+The collections module provides more specialized, high-performance alternatives for the built-in data types as well as a utility function to create named tuples. The following table lists the datatypes and operations of the collections module and their descriptions:
+
+namedtuple()- factory function for creating tuple subclasses with named fields
+deque- list-like container with fast appends and pops on either end
+ChainMap- dict-like class for creating a single view of multiple mappings
+Counter- dict subclass for counting hashable objects
+OrderedDict- dict subclass that remembers the order entries were added
+defaultdict- dict subclass that calls a factory function to supply missing values
+UserDict- wrapper around dictionary objects for easier dict subclassing
+UserList- wrapper around list objects for easier list subclassing
+UserString- wrapper around string objects for easier string subclassing
+"""
+
 def list_type():
     """Lists - Lists are positionally ordered collections of arbitrarily typed objects, and they have no fixed size. They are also mutable"""
 
