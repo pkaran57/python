@@ -1,6 +1,6 @@
 import numpy as np
 
-class Perceptron(object):
+class Perceptron:
     """Perceptron classifier.
 
     Parameters
@@ -64,4 +64,4 @@ class Perceptron(object):
 
     def predict(self, X):
         """Return class label after unit step"""
-        return np.where(self.net_input(X) >= 0.0, 1, -1)
+        return np.where(self.net_input(X) > 0.0, 1, -1)
