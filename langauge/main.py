@@ -31,7 +31,7 @@ from langauge.data_types import basic_types, collection_types, x_in_package_init
 from langauge.data_types import file_type
 from langauge.exception import exceptions
 from langauge.functions import generators, lambda_expressions, functions_and_scopes
-from langauge.oop import oop
+from langauge.oop.oop import *  # from copies a module’s attributes, such that they become simple variables in the recipient
 from langauge.package1 import utility as pkg1_util
 from langauge.package2 import utility as pkg2_util
 from langauge.statements_expressions import expressions, assignments, statements
@@ -92,7 +92,7 @@ functions_and_scopes.demo()
 lambda_expressions.demo()
 generators.demo()
 
-oop.demo()
+demo()
 
 exceptions.demo()
 
