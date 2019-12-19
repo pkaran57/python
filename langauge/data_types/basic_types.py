@@ -67,13 +67,13 @@ def string():
     S = 'A\nB\tC'            # \n is end-of-line, \t is tab
     S = 'Spam'
     print(len(S), S[0], S[3], S[-2], S[-1])
-    print(S[1:], S[0:3], S[:3], S[:-1], S[:])
+    print(S[1:], S[0:3], S[:3], S[:-1], S[:])       # [inclusive:not_inclusive]
     print(S * 3)
 
     print(S.replace('pa', 'xx'))
     print(S)        # Strings are immutable in Python
 
-    print('%s, eggs, and %s' % ('spam', 'SPAM!') )         # Formatting expression (all)
+    print('%s, eggs, and %s' % ('spam', 'SPAM!'))         # Formatting expression (all)
     print('{0}, eggs, and {1}'.format('spam', 'SPAM!'))
     print('{}, eggs, and {}'.format('spam', 'SPAM!'))      # Numbers optional (2.7+, 3.1+)
 
@@ -85,6 +85,8 @@ def others():
     print(None)         # special placeholder object called None commonly used to initialize names and objects
     L = ['This', 'is', 'a', 'list']
     print(type(L))      # The type object, returned by the type built-in function, is an object that gives the type of another object
+    print(type(L) is list)  # The operators 'is' and 'is not' test for object identity: x is y is true if and only if x and y are the same object
+    print(L is list)
     print(type(type(L)))
 
 
