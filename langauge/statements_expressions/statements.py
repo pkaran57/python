@@ -14,8 +14,8 @@ tmp1, tmp2 = f1(), f2()
 if tmp1 or tmp2: ...
 """
 
-X = (1 +
-     2)  # using newline is okay here since brackets are used
+X_global = (1 +
+            2)  # using newline is okay here since brackets are used
 
 
 def truthiness():
@@ -31,8 +31,6 @@ def control_statements():
     X = 1
 
     # if statement
-    if X > 0:
-        print('body of a compound statement can instead appear on the same line as the header in Python')
 
     if X:
         print('X is True!')
@@ -109,6 +107,7 @@ def comprehensions():
     print([x + y + z for x in 'abc' for y in 'lmn' for z in 'xyz'])         # nested for loops
 
     list_of_lines = ['line1', 'line2', 'filterOut']
+    print('List = ', [c * 2 for c in 'spam'])
     print('Set = ', {line for line in list_of_lines if line[0] == 'l'})
     print('Dict = ', {ix: line for ix, line in enumerate(list_of_lines) if line[0] == 'l'})
 

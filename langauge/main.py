@@ -1,5 +1,13 @@
 """
-Imports and modules
+Basic definitions:
+
+module: any *.py file. Its name is the file name.
+built-in module: a “module” (written in C) that is compiled into the Python interpreter, and therefore does not have a *.py file.
+package: any folder containing a file named __init__.py in it. Its name is the name of the folder. In Python 3.3 and above, any folder (even without a __init__.py file) is considered a package
+
+Imports and modules:
+
+When a module is imported, Python runs all of the code in the module file. When a package is imported, Python runs all of the code in the package’s __init__.py file, if such a file exists.
 
 imports must find module's file, compile them to byte code (if needed), and run the module’s code to build the objects it defines
 
@@ -25,17 +33,17 @@ import sys  # Load a library module
 from importlib import reload
 
 from langauge import module, shell_commands, data_types
-# from module1 import *                   # Copy out _all_ variables
+# from module1 import *                   # Copy out all variables in the file (note that this will not copy out variables from multiple python files, just one)
 # from M import func as mfunc    # Rename uniquely with "as"
 from langauge.data_types import basic_types, collection_types, x_in_package_init
 from langauge.data_types import file_type
 from langauge.exception import exceptions
 from langauge.functions import generators, lambda_expressions, functions_and_scopes
-from langauge.oop.oop import *  # from copies a module’s attributes, such that they become simple variables in the recipient
+from langauge.oop.oop import demo  # from copies a module’s attributes, such that they become simple variables in the recipient
 from langauge.package1 import utility as pkg1_util
 from langauge.package2 import utility as pkg2_util
 from langauge.statements_expressions import expressions, assignments, statements
-from langauge.threads import threads, locks
+from langauge.threads import threads, locks, conditions
 
 reload(module)      # reload module
 
@@ -86,13 +94,14 @@ shell_commands.demo()
 
 assignments.demo()
 expressions.demo()
-statements.demo()
 
+# imp starts below - focus!
+statements.demo()
 functions_and_scopes.demo()
 lambda_expressions.demo()
 generators.demo()
 
-demo()
+demo()      # oop demo
 
 exceptions.demo()
 

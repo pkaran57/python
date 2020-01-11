@@ -3,12 +3,14 @@
 import builtins
 import sys
 
+X_global = 88
 
 def demo():
     ''' function and function annotations
 
     arbitrary user-defined data about a function’s arguments and result—to a function object.
     Annotations are simply attached to the function object’s __annotations__ attribute for use by other tools. For instance, such a tool might use annotations in the context of error testing.
+    Annotations can be a string or a type
     '''
     def hello_world_main(a:'annotation to a parameter'= 9, b:bool=True) -> 'return value annotation':             # when the def is done running, hello_world_main variable gets assigned the function object
         test = None
@@ -18,10 +20,10 @@ def demo():
         else:
             def hello_world():
                 print("Hello World false!")
-        return hello_world()
+        return hello_world
 
 
-    function_object = hello_world_main
+    function_object = hello_world_main()
     function_object()
     function_object.test = True  # functions allow arbitrary attributes to be attached to record information for later use
 
@@ -81,6 +83,7 @@ def demo():
     '''
 
 
+    # IMP : argument’s default retains its value from the prior call, and is not reset to its original value coded in the def header
     def f(a, b=[77, 88], c=99, modify_b=False):
         print('f(a,b,c) = ', a, b, c)  # 99 is default for c
         if (modify_b): b[1] = 55
@@ -120,7 +123,7 @@ def demo():
     f(**{'c': 22, 'a': 33, 'b': 44})        # UNPACKING dictionary, note that using ** instead of *
 
     # keyword-only arguments are coded as named arguments that may appear after *args in the arguments list. All such arguments must be passed using keyword syntax in the call.
-    def kwonly(a, *b, c):
+    def kwonly(a, *b, c):       # c needs to be passed along as a keyword arg
         print(a, b, c)
 
     kwonly(a=1, c=3)
@@ -144,19 +147,16 @@ def demo():
 
     print('All the names in the built-in scope - ', dir(builtins))
 
-    X = 88
-
-
     def func():
-        global X  # global statement tells Python that a function plans to change one or more global names
-        global Y
-        Y = 9
-        X = 99  # Local X: hides global, but we want this here
+        global X_global  # global statement tells Python that a function plans to change one or more global names.
+        global Y_global         # variables can be predefined or they can be added to the global scope via the global keyword
+        Y_global = 9
+        X_global = 99  # Local X: hides global, but we want this here
 
 
     func()
-    print(X)  # Prints 99, but only if func() is called!
-    print("var Y in global scope (even if defined within function body) = ", Y)
+    print(X_global)  # Prints 99, but only if func() is called!
+    print("var Y in global scope (even if defined within function body) = ", Y_global)
 
 
     # nonlocal allows a nested function to change one or more names defined in a syntactically enclosing function’s scope.

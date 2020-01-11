@@ -17,11 +17,13 @@ def list_type():
 
     L = [123, 'spam', 1.23]            # A list of three different-type objects
     print(L[:-1])
-    print(L + [4, 5, 6])
+    print(L + [4, 5, 6])        # new list will be created
     print(L * 2)
 
     L.append('NI')                     # Growing: add object at end of list
     L.pop(2)                           # Shrinking: delete an item in the middle
+
+    print('L = ', L)
 
     L = [1, 2, 6, 0]
     L.sort()
@@ -46,7 +48,7 @@ def list_type():
     print(col2)
     print([row[1] + 1 for row in M])                    # Add 1 to each item in column 2
     print([row[1] for row in M if row[1] % 2 == 0])     # Filter out odd items
-    print([M[i][i] for i in [0, 1, 2]])                 # Collect a diagonal from matrix
+    print('Diagonal = ', [M[i][i] for i in range(len(M))])
 
 
 def dictionaries_type():
@@ -73,6 +75,7 @@ def tuple_type():
     # T[0] = 99    Tuples are immutable, cannot do this!
     T = 'spam', 3.0, [11, 22, 33]       # another way of creating a tuple, np params needed!
     print('Tuple comprehension statement - ', tuple(i for i in [1, 2, 3]))
+    print('type of data struct = ', type(tuple((i for i in [5, 6, 7]))))
 
 
 def set_type():
