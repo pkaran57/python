@@ -1,13 +1,18 @@
 import logging
+from collections import Counter
+
 import matplotlib.pyplot as plt
 
 from ml.perceptron.domain.Perceptron import Perceptron
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
 class PerceptronLearningAlgo:
 
     def __init__(self, learning_rate, num_of_epochs, training_samples, validation_samples,
                  true_class_labels_in_dataset):
+        self.__logger = logging.getLogger('learning-rate={}'.format(learning_rate))
+
         self.__learning_rate = learning_rate
         self.__num_of_epochs = num_of_epochs
         self.__perceptrons = [Perceptron(training_samples, perceptron_class_label) for perceptron_class_label in
@@ -19,7 +24,7 @@ class PerceptronLearningAlgo:
         self.__validation_samples = validation_samples
         self.__validation_accuracies_per_epoch = []
 
-        self.__logger = logging.getLogger('learning-rate={}'.format(learning_rate))
+        self.__validation_sample_count_by_labels = Counter([sample.true_class_label for sample in validation_samples])
 
     def train_and_compute_accuracy(self):
         self.__compute_accuracy(0)
@@ -29,6 +34,7 @@ class PerceptronLearningAlgo:
             self.__compute_accuracy(epoch_num)
 
         self.__plot_accuracies()
+        self.__compute_confusion_matrix()
 
     def __compute_accuracy(self, epoch_num):
         for samples in self.__validation_samples, self.__training_samples:
@@ -36,8 +42,7 @@ class PerceptronLearningAlgo:
             total_num_predictions = len(samples)
 
             for sample in samples:
-                net_inputs = list(map(lambda perceptron: perceptron.get_net_input(sample), self.__perceptrons))
-                perceptron_target_label_with_max_net_input = net_inputs.index(max(net_inputs))
+                perceptron_target_label_with_max_net_input = self.__get_prediction_for_sample(sample)
 
                 if perceptron_target_label_with_max_net_input == sample.true_class_label:
                     correct_predictions += 1
@@ -53,6 +58,11 @@ class PerceptronLearningAlgo:
                                                                                     'training' if samples is self.__training_samples else 'validation',
                                                                                     accuracy))
 
+    def __get_prediction_for_sample(self, sample):
+        net_inputs = list(map(lambda perceptron: perceptron.get_net_input(sample), self.__perceptrons))
+        perceptron_target_label_with_max_net_input = net_inputs.index(max(net_inputs))
+        return perceptron_target_label_with_max_net_input
+
     def __plot_accuracies(self):
         plt.title("Accuracy over epochs for learning rate = {}".format(self.__learning_rate))
 
@@ -64,3 +74,31 @@ class PerceptronLearningAlgo:
 
         plt.legend()
         plt.show()
+
+    def __compute_confusion_matrix(self):
+        predicted_labels = []
+        actual_labels = []
+
+        for validation_sample in self.__validation_samples:
+            predicted_target_label = self.__get_prediction_for_sample(validation_sample)
+            predicted_labels.append(predicted_target_label)
+            actual_labels.append(validation_sample.true_class_label)
+
+        training_samples_confusion_matrix = confusion_matrix(y_true=actual_labels, y_pred=predicted_labels)
+
+        for true_class_label, row in enumerate(training_samples_confusion_matrix):
+            actual_count = sum(row)
+            expected_count = self.__validation_sample_count_by_labels.get(true_class_label)
+
+            assert actual_count == expected_count, \
+                'Total sample count for true class label {} does not equal to the count in confusion matrix. Expected = {}, Actual = {}'.format(
+                    true_class_label,
+                    expected_count,
+                    actual_count)
+
+        confusion_matrix_display = ConfusionMatrixDisplay(training_samples_confusion_matrix, range(10))
+        confusion_matrix_display.plot(values_format='d')
+        plt.title("Confusion matrix for learning rate = {}".format(self.__learning_rate))
+        plt.show()
+
+        self.__logger.info("Confusion matrix = \n\n{}\n\n".format(training_samples_confusion_matrix))
