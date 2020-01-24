@@ -1,5 +1,6 @@
 import csv
 import logging
+import random
 
 import numpy as np
 
@@ -22,11 +23,13 @@ class MNISTSample:
         return "Sample #{} : true class label = {}, inputs = {}".format(self.sample_number, self.true_class_label, self.inputs)
 
     @staticmethod
-    def load_samples_from_dataset(dataset_file_location):
+    def load_and_shuffle_samples_from_dataset(dataset_file_location):
         MNISTSample.logger.info('Loading samples from {} ...'.format(dataset_file_location))
 
         with open(dataset_file_location) as csv_file:
             samples = [MNISTSample(row_num, int(row[0]), row[1:]) for row_num, row in enumerate(csv.reader(csv_file))]
+
+        random.shuffle(samples)
 
         MNISTSample.logger.info('Found {} samples in {}'.format(len(samples), dataset_file_location))
         return samples

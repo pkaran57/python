@@ -5,8 +5,8 @@ from ml.perceptron.domain.PerceptronLearningAlgo import PerceptronLearningAlgo
 
 logger = logging.getLogger("MAIN")
 
-training_samples = MNISTSample.load_samples_from_dataset('data/mnist_train.csv')
-validation_samples = MNISTSample.load_samples_from_dataset('data/mnist_test.csv')
+training_samples = MNISTSample.load_and_shuffle_samples_from_dataset('data/mnist_train.csv')
+validation_samples = MNISTSample.load_and_shuffle_samples_from_dataset('data/mnist_test.csv')
 
 num_of_epochs = 50
 true_class_labels_in_dataset = set(range(10))
