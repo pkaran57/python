@@ -9,7 +9,7 @@ from collections import Counter
 
 import matplotlib.pyplot as plt
 
-from .Perceptron import Perceptron
+from perceptron.domain.Perceptron import Perceptron
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 

@@ -4,8 +4,8 @@
 
 import logging
 
-from .domain.MNISTSample import MNISTSample
-from .domain.PerceptronLearningAlgo import PerceptronLearningAlgo
+from perceptron.domain.MNISTSample import MNISTSample
+from perceptron.domain.PerceptronLearningAlgo import PerceptronLearningAlgo
 
 logger = logging.getLogger("MAIN")
 
