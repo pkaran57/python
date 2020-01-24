@@ -1,3 +1,9 @@
+"""
+Name - Karan Patel, PSU ID - 965051876
+
+Class that represents a Perceptron
+"""
+
 import logging
 import random
 import numpy as np
@@ -15,6 +21,10 @@ class Perceptron:
         self.__logger = logging.getLogger('Perceptron-target-{}'.format(self.__perceptron_class_label))
 
     def train_for_an_epoch(self, learning_rate):
+        """
+        Trains the perceptron using training samples for a single epoch by implementing perceptron learning algorithm and updating weights whenever necessary
+        :param learning_rate: Learning rate to use for perceptron learning algorithm
+        """
 
         for sample in self.__training_samples:
 

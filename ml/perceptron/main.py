@@ -16,7 +16,7 @@ validation_samples = MNISTSample.load_and_shuffle_samples_from_dataset('data/mni
 num_of_epochs = 50
 true_class_labels_in_dataset = set(range(10))
 
-# For each learning rate, execute the Perceptron learning algorithm and determining accuracy
+# For each learning rate, execute the Perceptron learning algorithm and determining accuracy after each epoch and accuracy matrix at the end
 for learning_rate in 0.1, 0.01, .001:
     perceptron_learning_algo = PerceptronLearningAlgo(learning_rate, num_of_epochs, training_samples, validation_samples, true_class_labels_in_dataset)
     perceptron_learning_algo.train_and_compute_accuracy()

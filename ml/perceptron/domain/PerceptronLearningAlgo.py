@@ -1,3 +1,9 @@
+"""
+Name - Karan Patel, PSU ID - 965051876
+
+Class that represents an instance of a Perceptron Learning algorithm
+"""
+
 import logging
 from collections import Counter
 
@@ -27,6 +33,11 @@ class PerceptronLearningAlgo:
         self.__validation_sample_count_by_labels = Counter([sample.true_class_label for sample in validation_samples])
 
     def train_and_compute_accuracy(self):
+        """
+        Train all perceptrons (each belonging to a unique target label) for a given number of epochs.
+        Determining accuracy for training and validation samples after each epoch and accuracy matrix at the end. Generate diagrams for both.
+        :return:
+        """
         self.__compute_accuracy(0)
 
         for epoch_num in range(1, self.__num_of_epochs + 1):
@@ -37,6 +48,11 @@ class PerceptronLearningAlgo:
         self.__compute_confusion_matrix()
 
     def __compute_accuracy(self, epoch_num):
+        """
+        Compute accuracy for training and validation samples after each epoch
+        :param epoch_num:
+        :return:
+        """
         for samples in self.__validation_samples, self.__training_samples:
             correct_predictions = 0
             total_num_predictions = len(samples)
@@ -59,6 +75,11 @@ class PerceptronLearningAlgo:
                                                                                     accuracy))
 
     def __get_prediction_for_sample(self, sample):
+        """
+        Get prediction for sample
+        :param sample: Sample's class to predict
+        :return: Prediction of the algorithm for the sample
+        """
         net_inputs = list(map(lambda perceptron: perceptron.get_net_input(sample), self.__perceptrons))
         perceptron_target_label_with_max_net_input = net_inputs.index(max(net_inputs))
         return perceptron_target_label_with_max_net_input

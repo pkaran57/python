@@ -1,3 +1,9 @@
+"""
+Name - Karan Patel, PSU ID - 965051876
+
+Class that represents a sample from the MNIST dataset
+"""
+
 import csv
 import logging
 import random
