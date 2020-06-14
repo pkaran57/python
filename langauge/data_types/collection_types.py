@@ -11,6 +11,8 @@ UserDict- wrapper around dictionary objects for easier dict subclassing
 UserList- wrapper around list objects for easier list subclassing
 UserString- wrapper around string objects for easier string subclassing
 """
+from collections import namedtuple
+
 
 def list_type():
     """Lists - Lists are positionally ordered collections of arbitrarily typed objects, and they have no fixed size. They are also mutable"""
@@ -92,8 +94,31 @@ def set_type():
     print("'p' in set('spam') = ", 'p' in set('spam')) # in membership test
 
 
+def named_tuples():
+    """
+    If we do not need to add behavior to the object, and we know in advance which attributes we need to store,
+    we can use a named tuple. They are a great way to group read-only data together.
+    """
+
+    '''Describe the named tuple by giving it a name and outlining its attributes. This returns a class-like object 
+    that we can instantiate with the required values as many times as we want. The namedtuple constructor accepts two 
+    arguments. The first is an identifier for the named tuple. The second is a list of string attributes that the 
+    named tuple requires. The result is an object that can be called just like a normal class to instantiate other 
+    objects. The constructor must have exactly the correct number of arguments that can be passed in as arguments or 
+    keyword arguments. '''
+
+    Stock = namedtuple("Stock", ["symbol", "current", "high", "low"])
+    stock = Stock("FB", 177.46, high=178.67, low=175.79)
+
+    print(stock.current)
+
+    symbol, current, high, low = stock
+    print(symbol)
+    print(stock[0])
+
 def demo():
     list_type()
     dictionaries_type()
     tuple_type()
     set_type()
+    named_tuples()
