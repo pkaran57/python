@@ -43,7 +43,7 @@ from langauge.oop.oop import demo  # from copies a module’s attributes, such t
 from langauge.package1 import utility as pkg1_util
 from langauge.package2 import utility as pkg2_util
 from langauge.statements_expressions import expressions, assignments, statements
-from langauge.threads import threads, locks, conditions
+from langauge.threads import threads, locks, conditions, race_condition
 
 reload(module)      # reload module
 
@@ -108,3 +108,4 @@ exceptions.demo()
 threads.demo()
 locks.demo()
 # conditions.demo()             # commented out since this demo contains an infinite loop, look at it!
+race_condition.demo()
