@@ -28,6 +28,7 @@ The Module Search Path - need to tell Python where to look to find files to impo
 
 It is also possible to create a Python module by writing code in an external language such as C, C++, and others (e.g., Java, in the Jython implementation of the language). Such modules are called extension modules
 """
+import asyncio
 
 import sys  # Load a library module
 from importlib import reload
@@ -109,3 +110,5 @@ threads.demo()
 locks.demo()
 # conditions.demo()             # commented out since this demo contains an infinite loop, look at it!
 race_condition.demo()
+
+asyncio.demo()
