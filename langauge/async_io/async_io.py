@@ -74,5 +74,3 @@ def demo():
     group = asyncio.gather(*pending, return_exceptions=True)
     loop.run_until_complete(group)
     loop.close()
-
-demo()
