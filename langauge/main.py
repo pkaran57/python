@@ -39,7 +39,7 @@ from langauge import module, shell_commands, data_types
 from langauge.async_io import coroutine, event_loop, async_io, future_and_tasks
 from langauge.data_types import basic_types, collection_types, x_in_package_init
 from langauge.data_types import file_type
-from langauge.exception import exceptions
+from langauge.exception import exceptions, context_management
 from langauge.functions import generators, lambda_expressions, functions_and_scopes
 from langauge.oop.oop import demo  # from copies a module’s attributes, such that they become simple variables in the recipient
 from langauge.package1 import utility as pkg1_util
@@ -106,6 +106,7 @@ generators.demo()
 demo()      # oop demo
 
 exceptions.demo()
+context_management.demo()
 
 threads.demo()
 locks.demo()
