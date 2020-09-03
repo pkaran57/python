@@ -48,7 +48,8 @@ def control_statements():
 
     # for loop
     L = [(1, 2, 3), (4, 5, 6)]
-    for (a, *b, c) in L: print('a = {}, b = {}, c = {}'.format(a, b, c))        # complex variable assignments an be used in a for loop
+    for (a, *b, c) in L: print(
+        'a = {}, b = {}, c = {}'.format(a, b, c))  # complex variable assignments an be used in a for loop
 
     X, Y = 0, 99
 
@@ -80,6 +81,23 @@ def control_statements():
     print('dictionary switch - ', branch.get('choice', 'default'))
 
 
+class IImplementIterationProtocol:
+    # An iterator must implement the __iter__() special method. must return an iterable; i.e., an object that
+    # implements the __next__() special method.
+    def __iter__(self):
+        self.x = 0  # Initialize some state to the “starting” state.
+        return self
+
+    # The __next__() method is defined. This will be called for every step in the iteration sequence until
+    # StopIteration is raised. The returned values for each iteration are generated.
+    def __next__(self):
+        if self.x > 2:
+            raise StopIteration
+        else:
+            self.x += 1
+            return self.x
+
+
 def iteration_protocol():
     """
     Iteration protocol
@@ -92,19 +110,21 @@ def iteration_protocol():
     Lists and many other built-in objects, though, are not their own iterators because they do support multiple open iterations—for example, there may be multiple iterations in nested loops all at different positions. For such objects, we must call iter to start iterating
     """
     L = [1]
-    I = iter(L)                               # Obtain an iterator object from an iterable
-    print('I.__next__() = ', I.__next__())    # Call iterator's next to advance to next item
+    I = iter(L)  # Obtain an iterator object from an iterable
+    print('I.__next__() = ', I.__next__())  # Call iterator's next to advance to next item
     # I.__next__()                              # Will raise StopIteration exception
-    print('iter(L).__next__() = ', iter(L).__next__())    # New iterator on the same list object
+    print('iter(L).__next__() = ', iter(L).__next__())  # New iterator on the same list object
     print('iter(range(5)).__next__() = ', iter(range(5)).__next__())
 
+    for i in IImplementIterationProtocol():
+        print(i)
 
 def comprehensions():
     """List comprehensions can be used to iterate over any iterable object. Both set and dictionary comprehensions support the extended syntax of list comprehensions."""
 
-    print([c * 2 for c in 'spam'])                                          # Repeat characters in a string
-    print([[x, x / 2, x * 2] for x in range(5) if x % 2 == 0])              # if clause
-    print([x + y + z for x in 'abc' for y in 'lmn' for z in 'xyz'])         # nested for loops
+    print([c * 2 for c in 'spam'])  # Repeat characters in a string
+    print([[x, x / 2, x * 2] for x in range(5) if x % 2 == 0])  # if clause
+    print([x + y + z for x in 'abc' for y in 'lmn' for z in 'xyz'])  # nested for loops
 
     list_of_lines = ['line1', 'line2', 'filterOut']
     print('List = ', [c * 2 for c in 'spam'])
@@ -115,15 +135,16 @@ def comprehensions():
 def looping_functions():
     """Loop Coding Techniques - range, zip, enumerate"""
 
-    for i in range(-6, 6, 2): print(i, 'Pythons')     # range is an iterable that generates items on demand
+    for i in range(-6, 6, 2): print(i, 'Pythons')  # range is an iterable that generates items on demand
 
     L1 = [1, 2, 3, 4, 99]
     L2 = [5, 6, 7, 8]
     # zip takes one or more sequences as arguments and returns a series of tuples that pair up parallel items taken from those sequences.
     # zip truncates result tuples at the length of the shortest sequence when the argument lengths differ
-    print('zip result = ', list(zip(L1, L2)))       # Truncates at len(shortest)
+    print('zip result = ', list(zip(L1, L2)))  # Truncates at len(shortest)
 
-    for (offset, item) in enumerate(['a', 'b', 'c']):        # enumerate's net effect is to give loops a counter “for free” by returning an (index, value) tuple each time through the loop
+    for (offset, item) in enumerate(['a', 'b',
+                                     'c']):  # enumerate's net effect is to give loops a counter “for free” by returning an (index, value) tuple each time through the loop
         print(item, ' appears at position ', offset)
 
     print("next(enumerate('s')) = ", next(enumerate('s')))
@@ -138,10 +159,10 @@ def useful_lib_functions():
 
     L = ['a', 'b']
     strMap = map(str.upper, L)
-    print(strMap.__next__())                 # map is itself an iterable in 3.X
+    print(strMap.__next__())  # map is itself an iterable in 3.X
     print(list(strMap))
 
-    print(list(filter(bool, ['3', '', '1'])))       # nonempty=True
+    print(list(filter(bool, ['3', '', '1'])))  # nonempty=True
     print(sum([3, 2, 4, 1, 5, 0]))
     print(max([3, 2, 4, 1, 5, 0]))
     print(min([3, 2, 4, 1, 5, 0]))

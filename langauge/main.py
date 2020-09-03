@@ -36,7 +36,7 @@ from importlib import reload
 from langauge import module, shell_commands, data_types
 # from module1 import *                   # Copy out all variables in the file (note that this will not copy out variables from multiple python files, just one)
 # from M import func as mfunc    # Rename uniquely with "as"
-from langauge.async_io import coroutine, event_loop, async_io, future_and_tasks
+from langauge.async_io import coroutine, event_loop, async_io, future_and_tasks, async_with, run_in_executor
 from langauge.data_types import basic_types, collection_types, x_in_package_init
 from langauge.data_types import file_type
 from langauge.exception import exceptions, context_management
@@ -117,3 +117,5 @@ async_io.demo()
 coroutine.demo()
 event_loop.demo()
 future_and_tasks.demo()
+async_with.demo()
+run_in_executor.demo()
