@@ -89,7 +89,11 @@ def demo():
     for i in range(10):
         loop.create_task(f(i))
     pending = asyncio.all_tasks(loop=loop)
+
+    # Without return_exceptions=True, the ZeroDivisionError would be raised from run_until_complete(), stopping the
+    # loop and thus preventing the other tasks from finishing.
     group = asyncio.gather(*pending, return_exceptions=True)
+
     results = loop.run_until_complete(group)
     print(f'Results: {results}')
     loop.close()
