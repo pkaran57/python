@@ -38,5 +38,43 @@ async def demo_async_for():
         print(status_code)
 
 
+# a very simple async generator
+async def doubler(n):
+    for i in range(n):
+        yield i, i * 2
+        await asyncio.sleep(0.1)
+
+
+async def f(x):
+    await asyncio.sleep(0.1)
+    return x + 100
+
+
+async def factory(n):
+    for x in range(n):
+        await asyncio.sleep(0.1)
+        yield f, x
+
+
+async def async_for_comphrension_demo():
+    """
+    It’s the async for that makes a comprehension an async comprehension, not the presence of await. All that’s
+    needed for await to be legal (inside a comprehension) is for it to be used inside the body of a coroutine
+    function—i.e., a function declared with async def. Using await and async for inside the same list comprehension
+    is really combining two separate concepts :return:
+    """
+    result = [x async for x in doubler(3)]
+    print(result)
+
+    """First, the factory(3) call returns an async generator, which must be driven by iteration. Because it’s an 
+    async generator, you can’t just use for; you must use async for. The values produced by the async generator are a 
+    tuple of a coroutine function f and an int. Calling the coroutine function f() produces a coroutine, which must 
+    be evaluated with await. Note that inside the comprehension, the use of await has nothing at all to do with the 
+    use of async for: they are doing completely different things and acting on different objects entirely. """
+    results = [await f(x) async for f, x in factory(3)]
+    print('results = ', results)
+
+
 def demo():
     asyncio.run(demo_async_for())
+    asyncio.run(async_for_comphrension_demo())

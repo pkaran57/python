@@ -62,7 +62,9 @@ def demo():
         time.sleep(0.5)
         print(f"{time.ctime()} Hello from a thread!")
 
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
     task = loop.create_task(main())
 
     loop.run_in_executor(None, blocking)
@@ -73,4 +75,21 @@ def demo():
         task.cancel()
     group = asyncio.gather(*pending, return_exceptions=True)
     loop.run_until_complete(group)
+    loop.close()
+
+    # --------- Example 4 ---------
+
+    async def f(delay):
+        await asyncio.sleep(1 / delay)
+        return delay
+
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
+    for i in range(10):
+        loop.create_task(f(i))
+    pending = asyncio.all_tasks(loop=loop)
+    group = asyncio.gather(*pending, return_exceptions=True)
+    results = loop.run_until_complete(group)
+    print(f'Results: {results}')
     loop.close()

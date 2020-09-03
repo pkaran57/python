@@ -56,9 +56,11 @@ def demo():
     inside your coroutine 
     """
 
+    """    
     coroutine = f()
     coroutine.send(None)
     coroutine.throw(Exception, 'blah')
+    """
 
     # ----- Coroutine cancellation with CancelledError
 
@@ -70,6 +72,7 @@ def demo():
     it. 
     """
 
+    """
     async def f():
         try:
             while True: await asyncio.sleep(0)
@@ -82,3 +85,4 @@ def demo():
     coroutine = f()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(coroutine)
+    """
