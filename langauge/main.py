@@ -29,25 +29,19 @@ The Module Search Path - need to tell Python where to look to find files to impo
 It is also possible to create a Python module by writing code in an external language such as C, C++, and others (e.g., Java, in the Jython implementation of the language). Such modules are called extension modules
 """
 import asyncio
+from importlib import reload
 
 import sys  # Load a library module
-from importlib import reload
 
 from langauge import module, shell_commands, data_types
 # from module1 import *                   # Copy out all variables in the file (note that this will not copy out variables from multiple python files, just one)
 # from M import func as mfunc    # Rename uniquely with "as"
 from langauge.async_io import coroutine, event_loop, async_io, future_and_tasks, async_with, run_in_executor, \
-    async_for_and_async_comphrension
+    async_for_and_async_comphrension, executor_takes_too_long
 from langauge.data_types import basic_types, collection_types, x_in_package_init
 from langauge.data_types import file_type
-from langauge.exception import exceptions, context_management
-from langauge.functions import generators, lambda_expressions, functions_and_scopes
-from langauge.oop.oop import \
-    demo  # from copies a module’s attributes, such that they become simple variables in the recipient
 from langauge.package1 import utility as pkg1_util
 from langauge.package2 import utility as pkg2_util
-from langauge.statements_expressions import expressions, assignments, statements
-from langauge.threads import threads, locks, conditions, race_condition
 
 reload(module)  # reload module
 
@@ -114,5 +108,6 @@ future_and_tasks.demo()
 async_with.demo()
 run_in_executor.demo()
 async_for_and_async_comphrension.demo()
+executor_takes_too_long.demo()
 
 print('\n\nDone!')
