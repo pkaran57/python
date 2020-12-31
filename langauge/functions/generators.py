@@ -46,7 +46,7 @@ def demo():
     print(G.send(78))
     print(next(G))
 
-    #
+    # See https://www.python.org/dev/peps/pep-0289/#the-details for Generator Expression syntax details
     # Just like generator functions, generator expressions are a memory-space optimization—they do not require the entire result list to be constructed all at once, as the square-bracketed list comprehension does
     # generator expressions may also run slightly slower than list comprehensions in practice, so they are probably best used only for very large result sets, or applications that cannot wait for full results generation.
     print('expression object returned - ', (x + 1 for x in [1, 2, 3]))     # the expression within the print will return a generator!
